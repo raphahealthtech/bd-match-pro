@@ -81,7 +81,7 @@ a{color:inherit}
 
 /* ===== LAYOUT ===== */
 .shell{display:grid;grid-template-columns:380px 1fr;min-height:calc(100vh - 58px)}
-.sidebar{border-right:1px solid var(--line);padding:26px 26px 40px;background:linear-gradient(180deg,var(--paper) 0%, var(--cream) 100%);position:sticky;top:58px;height:calc(100vh - 58px);overflow-y:auto}
+.sidebar{border-right:1px solid var(--line);padding:26px 26px 40px;background:linear-gradient(180deg,var(--paper) 0%, var(--cream) 100%);position:sticky;top:58px;align-self:start;max-height:calc(100vh - 58px);overflow-y:auto}
 .main{padding:26px 32px 60px;max-width:1180px}
 
 /* ===== SIDEBAR FORM ===== */
@@ -283,6 +283,88 @@ body.lang-zh [data-lang-block=en]{display:none !important}
   .kpis{grid-template-columns:repeat(2,1fr)}
   .predict .pr-grid{grid-template-columns:repeat(2,1fr)}
 }
+
+/* =================================================================== */
+/* ============ EDITORIAL HERO · v2 (classical × modern) ============== */
+/* =================================================================== */
+.bd-hero{position:relative;background:#0d0c0a;color:#f5f0e1;overflow:hidden;border-bottom:1px solid #2a2418}
+.bd-hero .hero-art{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.85}
+.bd-hero .hero-art svg{width:100%;height:100%;display:block}
+.bd-hero .hero-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%, transparent 0%, rgba(13,12,10,.55) 60%, rgba(13,12,10,.92) 100%);pointer-events:none}
+.bd-hero .hero-grain{position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px, rgba(212,175,55,.05) 1px, transparent 0);background-size:3px 3px;mix-blend-mode:overlay;pointer-events:none}
+
+.bd-hero-inner{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:72px 48px 88px;display:grid;grid-template-columns:1fr;gap:0}
+
+.bd-hero .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.32em;color:#d4af37;text-transform:uppercase;margin-bottom:32px}
+.bd-hero .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#d4af37;box-shadow:0 0 12px #d4af37}
+.bd-hero .eyebrow .bar{display:inline-block;width:36px;height:1px;background:#d4af37;opacity:.6}
+
+.bd-hero h1.headline{font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:clamp(48px,7.4vw,108px);line-height:.96;letter-spacing:-.02em;margin:0 0 28px;max-width:1100px}
+.bd-hero h1.headline em{font-style:italic;color:#d4af37}
+.bd-hero h1.headline .brk{display:block}
+.bd-hero h1.headline .small{display:block;font-size:.5em;color:#bcb29c;letter-spacing:.005em;margin-top:14px;font-style:italic;font-family:'DM Serif Display',serif}
+
+.bd-hero .lede{font-family:'DM Sans',sans-serif;font-size:clamp(15px,1.3vw,18px);color:#d8cfb6;max-width:680px;line-height:1.65;margin:0 0 56px}
+.bd-hero .lede strong{color:#f5f0e1;font-weight:600}
+
+.hero-questions{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(212,175,55,.25);margin-top:48px}
+.hero-q{padding:32px 28px 28px;border-right:1px solid rgba(212,175,55,.18);position:relative}
+.hero-q:last-child{border-right:0}
+.hero-q .qnum{font-family:'JetBrains Mono',monospace;font-size:11px;color:#d4af37;letter-spacing:.18em;margin-bottom:14px}
+.hero-q .q-zh{font-family:'DM Serif Display',serif;font-size:clamp(22px,2.2vw,30px);color:#f5f0e1;line-height:1.2;margin:0 0 8px;letter-spacing:-.01em}
+.hero-q .q-en{font-family:'DM Sans',sans-serif;font-size:13px;color:#999077;font-style:italic;letter-spacing:.01em;line-height:1.45}
+
+.hero-cta-row{display:flex;align-items:center;gap:18px;margin-top:48px;flex-wrap:wrap}
+.btn-hero{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;background:#d4af37;color:#0d0c0a;border:1px solid #d4af37;border-radius:2px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;letter-spacing:.05em;cursor:pointer;text-decoration:none;transition:all .25s ease;text-transform:uppercase}
+.btn-hero:hover{background:#e6c352;border-color:#e6c352;transform:translateY(-2px);box-shadow:0 12px 32px rgba(212,175,55,.25)}
+.btn-hero .arrow{font-size:18px;transition:transform .25s}
+.btn-hero:hover .arrow{transform:translateX(4px)}
+.btn-hero.ghost{background:transparent;color:#f5f0e1;border-color:rgba(245,240,225,.4)}
+.btn-hero.ghost:hover{background:rgba(245,240,225,.06);border-color:#f5f0e1;color:#f5f0e1;box-shadow:none}
+
+.hero-marquee{position:relative;z-index:2;background:#0a0907;border-top:1px solid rgba(212,175,55,.2);border-bottom:1px solid rgba(212,175,55,.2);padding:14px 0;color:#bcb29c;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;overflow:hidden;white-space:nowrap}
+.hero-marquee .track{display:inline-flex;gap:42px;animation:marq 38s linear infinite}
+.hero-marquee .track span{display:inline-flex;align-items:center;gap:42px}
+.hero-marquee .track span::after{content:'◆';color:#d4af37;font-size:8px;margin-left:42px}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ========== HOW IT WORKS ========== */
+.bd-how{background:var(--paper);padding:80px 48px;border-bottom:1px solid var(--line)}
+.bd-how-inner{max-width:1400px;margin:0 auto}
+.bd-how .h-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.32em;color:var(--accent-2);text-transform:uppercase;margin-bottom:18px}
+.bd-how h2{font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(36px,4.2vw,56px);line-height:1.05;letter-spacing:-.02em;margin:0 0 16px;max-width:900px;color:var(--ink)}
+.bd-how h2 em{font-style:italic;color:var(--accent-2)}
+.bd-how .h-sub{font-size:15px;color:var(--mute);max-width:640px;line-height:1.6;margin:0 0 56px}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.step{padding:36px 32px 36px 0;border-right:1px solid var(--line);position:relative}
+.step:last-child{border-right:0;padding-right:0}
+.step:nth-child(n+2){padding-left:32px}
+.step .step-num{font-family:'DM Serif Display',serif;font-size:64px;line-height:1;color:var(--accent-2);font-style:italic;margin-bottom:18px;letter-spacing:-.02em}
+.step h3{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;margin:0 0 10px;color:var(--ink);letter-spacing:-.01em}
+.step h3 .en{display:block;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mute);font-style:normal;letter-spacing:.16em;text-transform:uppercase;margin-top:4px}
+.step p{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin:0}
+
+/* ========== TOOL HEAD STRIP (between how and shell) ========== */
+.tool-head{background:var(--ink);color:var(--paper);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.tool-head .th-eye{font-family:'JetBrains Mono',monospace;font-size:11px;color:#d4af37;letter-spacing:.28em;text-transform:uppercase;margin-bottom:8px}
+.tool-head h3{font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(28px,3vw,40px);margin:0;letter-spacing:-.01em;line-height:1.1}
+.tool-head h3 em{color:#d4af37;font-style:italic}
+.tool-head .th-r{font-size:13px;color:#bcb29c;max-width:380px;line-height:1.55}
+.tool-head .th-r .arrow{display:inline-block;margin-top:8px;color:#d4af37;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em}
+
+@media (max-width:1080px){
+  .bd-hero-inner{padding:56px 24px 64px}
+  .hero-questions{grid-template-columns:1fr}
+  .hero-q{border-right:0;border-bottom:1px solid rgba(212,175,55,.18);padding:22px 0}
+  .hero-q:last-child{border-bottom:0}
+  .bd-how{padding:56px 24px}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:0;border-bottom:1px solid var(--line);padding:28px 0}
+  .step:nth-child(n+2){padding-left:0}
+  .step:last-child{border-bottom:0}
+  .tool-head{padding:28px 24px}
+}
 </style>
 </head>
 <body class="lang-zh">
@@ -307,6 +389,329 @@ body.lang-zh [data-lang-block=en]{display:none !important}
   <div class="lang-switch" id="lang-switch">
     <button data-l="zh" class="on">中</button>
     <button data-l="en">EN</button>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- ====================  EDITORIAL HERO  ======================== -->
+<!-- ============================================================== -->
+<section class="bd-hero">
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 1600 780" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="sparkGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"  stop-color="#fff5cc" stop-opacity="0.95"/>
+          <stop offset="35%" stop-color="#d4af37" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#d4af37" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="vault" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#1a1612"/>
+          <stop offset="1" stop-color="#0a0907"/>
+        </linearGradient>
+        <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="0.4"/>
+        </filter>
+      </defs>
+
+      <rect width="1600" height="780" fill="url(#vault)"/>
+
+      <!-- ============= LEFT: DNA double helix replacing Adam's slope ============= -->
+      <g stroke="#d4af37" stroke-width="1.3" fill="none" opacity="0.55" filter="url(#soft)">
+        <!-- Strand A -->
+        <path d="M -40 760
+                 C 120 700, 60 640, 180 580
+                 C 300 520, 80 460, 200 400
+                 C 320 340, 100 280, 220 220
+                 C 320 160, 180 110, 260  60"/>
+        <!-- Strand B (mirrored phase) -->
+        <path d="M 200 760
+                 C 60 700, 220 640, 100 580
+                 C -20 520, 240 460, 120 400
+                 C 0 340, 260 280, 140 220
+                 C 40 160, 280 110, 180 60"/>
+        <!-- Rungs (base pairs) -->
+        <line x1="60"  y1="730" x2="180" y2="730"/>
+        <line x1="50"  y1="685" x2="170" y2="685"/>
+        <line x1="80"  y1="640" x2="200" y2="640"/>
+        <line x1="120" y1="600" x2="190" y2="600"/>
+        <line x1="80"  y1="540" x2="240" y2="540"/>
+        <line x1="40"  y1="500" x2="220" y2="500"/>
+        <line x1="80"  y1="460" x2="200" y2="460"/>
+        <line x1="120" y1="420" x2="200" y2="420"/>
+        <line x1="80"  y1="380" x2="240" y2="380"/>
+        <line x1="40"  y1="340" x2="220" y2="340"/>
+        <line x1="80"  y1="300" x2="200" y2="300"/>
+        <line x1="120" y1="260" x2="200" y2="260"/>
+        <line x1="100" y1="220" x2="240" y2="220"/>
+        <line x1="60"  y1="180" x2="220" y2="180"/>
+        <line x1="100" y1="140" x2="200" y2="140"/>
+        <line x1="140" y1="100" x2="220" y2="100"/>
+      </g>
+
+      <!-- DNA accent dots at base pairs -->
+      <g fill="#d4af37" opacity="0.7">
+        <circle cx="60"  cy="730" r="1.6"/><circle cx="180" cy="730" r="1.6"/>
+        <circle cx="80"  cy="640" r="1.6"/><circle cx="200" cy="640" r="1.6"/>
+        <circle cx="40"  cy="500" r="1.6"/><circle cx="220" cy="500" r="1.6"/>
+        <circle cx="80"  cy="380" r="1.6"/><circle cx="240" cy="380" r="1.6"/>
+        <circle cx="40"  cy="340" r="1.6"/><circle cx="220" cy="340" r="1.6"/>
+        <circle cx="100" cy="220" r="1.6"/><circle cx="240" cy="220" r="1.6"/>
+        <circle cx="100" cy="140" r="1.6"/><circle cx="200" cy="140" r="1.6"/>
+      </g>
+
+      <!-- ============= RIGHT: Brain anatomy replacing the cloak of God ============= -->
+      <g stroke="#d4af37" stroke-width="1.3" fill="none" opacity="0.7" filter="url(#soft)">
+        <!-- Outer brain silhouette (cerebrum hemispheres) -->
+        <path d="M 1180 110
+                 C 1280 80, 1380 100, 1460 160
+                 C 1540 210, 1580 290, 1570 370
+                 C 1560 460, 1500 530, 1420 560
+                 C 1340 590, 1240 580, 1180 540
+                 C 1140 520, 1110 490, 1100 450
+                 C 1060 450, 1030 420, 1030 380
+                 C 1010 370, 1000 340, 1010 310
+                 C 1000 280, 1010 240, 1040 220
+                 C 1050 180, 1090 145, 1130 125
+                 C 1145 115, 1162 110, 1180 110 Z"/>
+
+        <!-- Cerebellum -->
+        <path d="M 1320 580 C 1380 600, 1430 600, 1470 580
+                 C 1500 565, 1520 540, 1510 510
+                 C 1480 525, 1430 535, 1380 530
+                 C 1340 525, 1310 540, 1320 580 Z"/>
+        <path d="M 1350 575 Q 1410 555, 1480 565" opacity=".7"/>
+        <path d="M 1360 590 Q 1420 575, 1490 580" opacity=".7"/>
+
+        <!-- Brain stem -->
+        <path d="M 1390 580 L 1395 640 L 1410 660"/>
+
+        <!-- Central sulcus (dividing hemispheres) -->
+        <path d="M 1280 110 Q 1290 250, 1305 380 T 1310 555" stroke-width="1.6"/>
+
+        <!-- Frontal lobe gyri -->
+        <path d="M 1080 200 Q 1140 220, 1110 270 T 1150 330"/>
+        <path d="M 1130 160 Q 1190 180, 1170 230 T 1210 290"/>
+        <path d="M 1180 130 Q 1240 150, 1230 200 T 1260 270"/>
+        <path d="M 1100 280 Q 1170 300, 1150 350 T 1180 410"/>
+        <path d="M 1080 370 Q 1140 390, 1130 440 T 1170 490"/>
+
+        <!-- Parietal/occipital gyri (right hemisphere) -->
+        <path d="M 1340 130 Q 1410 150, 1390 210 T 1420 280"/>
+        <path d="M 1400 110 Q 1480 130, 1460 200 T 1500 280"/>
+        <path d="M 1460 150 Q 1530 180, 1510 250 T 1530 330"/>
+        <path d="M 1330 270 Q 1410 290, 1390 350 T 1410 420"/>
+        <path d="M 1380 350 Q 1460 370, 1440 430 T 1450 500"/>
+        <path d="M 1450 270 Q 1520 300, 1500 360 T 1500 440"/>
+
+        <!-- Temporal lobe (lower) -->
+        <path d="M 1140 460 Q 1200 480, 1180 520"/>
+        <path d="M 1240 480 Q 1300 500, 1280 540"/>
+        <path d="M 1340 470 Q 1400 490, 1380 530"/>
+      </g>
+
+      <!-- Subtle radiance behind brain -->
+      <circle cx="1290" cy="340" r="280" fill="url(#sparkGlow)" opacity="0.18"/>
+
+      <!-- ============= ADAM's hand (left, reaching right with index extended) ============= -->
+      <g stroke="#f1ead4" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Forearm emerging from DNA helix area -->
+        <path d="M 280 470 C 340 455, 410 440, 470 425"/>
+        <!-- Back of hand / wrist -->
+        <path d="M 470 425 C 520 418, 560 412, 600 408"/>
+        <!-- Index finger extending toward center (the famous gesture, slightly relaxed) -->
+        <path d="M 600 408 C 660 402, 720 405, 760 412" stroke-width="2.6"/>
+        <!-- Thumb -->
+        <path d="M 545 410 C 555 392, 568 380, 580 378"/>
+        <!-- Middle finger curled -->
+        <path d="M 600 420 C 605 442, 595 460, 580 470"/>
+        <!-- Ring finger -->
+        <path d="M 580 422 C 583 444, 572 460, 558 468"/>
+        <!-- Little finger -->
+        <path d="M 560 422 C 562 440, 552 454, 540 460"/>
+        <!-- Knuckle hint -->
+        <path d="M 555 408 Q 570 400, 590 405" opacity=".7"/>
+      </g>
+
+      <!-- ============= GOD's hand (right, from brain, index pointing left, rigid) ============= -->
+      <g stroke="#f1ead4" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Forearm emerging from brain (cerebrum lower-left) -->
+        <path d="M 1100 420 C 1050 420, 990 420, 940 418"/>
+        <!-- Back of hand -->
+        <path d="M 940 418 C 900 414, 870 412, 840 410"/>
+        <!-- Index finger extended, rigid, toward center -->
+        <path d="M 840 410 C 810 408, 790 408, 778 410" stroke-width="2.8"/>
+        <!-- Thumb (upper) -->
+        <path d="M 905 410 C 902 392, 910 376, 928 372"/>
+        <!-- Middle finger curled -->
+        <path d="M 880 420 C 880 442, 870 460, 855 470"/>
+        <!-- Ring finger -->
+        <path d="M 900 422 C 902 444, 892 460, 878 468"/>
+        <!-- Little finger -->
+        <path d="M 920 422 C 920 440, 912 454, 900 460"/>
+        <!-- Knuckle hint -->
+        <path d="M 870 408 Q 890 400, 910 408" opacity=".7"/>
+      </g>
+
+      <!-- ============= THE SPARK (the focal point — gap between fingertips) ============= -->
+      <circle cx="769" cy="411" r="120" fill="url(#sparkGlow)"/>
+      <circle cx="769" cy="411" r="46"  fill="url(#sparkGlow)" opacity="0.8"/>
+      <circle cx="769" cy="411" r="2.5" fill="#fff8d6"/>
+      <line x1="762" y1="411" x2="776" y2="411" stroke="#fff8d6" stroke-width="0.8" opacity=".9"/>
+
+      <!-- Diagonal scaffold lines (subtle, like architectural sketch) -->
+      <g stroke="#d4af37" stroke-width="0.5" opacity="0.12">
+        <line x1="0" y1="780" x2="1600" y2="0"/>
+        <line x1="0" y1="0"   x2="1600" y2="780"/>
+        <line x1="800" y1="0" x2="800"  y2="780"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-vignette" aria-hidden="true"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
+
+  <div class="bd-hero-inner">
+    <div class="eyebrow">
+      <span class="dot"></span>
+      <span class="zh-txt">AI · 中国资产 · 全球市场</span>
+      <span class="en-txt">AI · CHINA ASSETS · GLOBAL MARKETS</span>
+      <span class="bar"></span>
+      <span>EST. 2026 · HONG KONG</span>
+    </div>
+
+    <h1 class="headline">
+      <span class="zh-txt">
+        <span class="brk">你的资产，</span>
+        <span class="brk">该<em>卖给谁</em>？</span>
+        <span class="small">什么价格 · 什么方式 · 什么时机</span>
+      </span>
+      <span class="en-txt">
+        <span class="brk">Where does</span>
+        <span class="brk">your asset <em>belong</em>?</span>
+        <span class="small">At what price. By which path. At what moment.</span>
+      </span>
+    </h1>
+
+    <p class="lede">
+      <span class="zh-txt"><strong>BD Match Pro</strong> 是 AI 驱动的跨境授权交易引擎。基于 1,196 笔可比交易、买方组合策略与 rNPV 风险调整模型，为中国生物医药资产精准匹配全球买方、估算合理对价、规划交易路径——这是中国资产走向世界市场的第一步。</span>
+      <span class="en-txt"><strong>BD Match Pro</strong> is an AI-powered cross-border licensing engine. Drawing on 1,196 comparable deals, buyer-portfolio strategy and risk-adjusted NPV, we match Chinese biopharma assets with the right global buyer, model fair-value pricing, and chart the path to a transaction — the first step of bringing Chinese assets to the world.</span>
+    </p>
+
+    <div class="hero-cta-row">
+      <a href="#asset-tool" class="btn-hero">
+        <span class="zh-txt">开始估值匹配</span>
+        <span class="en-txt">Start the match</span>
+        <span class="arrow">→</span>
+      </a>
+      <a href="#how" class="btn-hero ghost">
+        <span class="zh-txt">运作机制</span>
+        <span class="en-txt">How it works</span>
+      </a>
+    </div>
+
+    <div class="hero-questions">
+      <div class="hero-q">
+        <div class="qnum">Q.01 · WHO</div>
+        <div class="q-zh"><span class="zh-txt">能卖给谁？</span><span class="en-txt">Who will buy?</span></div>
+        <div class="q-en"><span class="zh-txt">从全球 380+ 战略买家中筛选最契合的对手方。</span><span class="en-txt">Identify the best-fit counter-party across 380+ global acquirers.</span></div>
+      </div>
+      <div class="hero-q">
+        <div class="qnum">Q.02 · HOW MUCH</div>
+        <div class="q-zh"><span class="zh-txt">值多少钱？</span><span class="en-txt">At what price?</span></div>
+        <div class="q-en"><span class="zh-txt">rNPV + 可比交易回归得出首付款、里程碑与销售提成区间。</span><span class="en-txt">rNPV plus comp-deal regression yield upfront, milestone and royalty ranges.</span></div>
+      </div>
+      <div class="hero-q">
+        <div class="qnum">Q.03 · HOW</div>
+        <div class="q-zh"><span class="zh-txt">用什么方式？</span><span class="en-txt">By which path?</span></div>
+        <div class="q-en"><span class="zh-txt">License-out · NewCo · 联合开发 · 全球分区——AI 给出最优结构。</span><span class="en-txt">License-out · NewCo · Co-development · Regional split — AI proposes the optimal structure.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== Marquee strip =============== -->
+<div class="hero-marquee" aria-hidden="true">
+  <div class="track">
+    <span>1,196 comparable deals · 380+ global buyers · rNPV · Risk-adjusted valuation · BD intelligence · Hong Kong · 跨境授权 · 战略匹配 · 中国资产·全球市场 · From China to the World · AI-powered · Editions 2026 ·</span>
+    <span>1,196 comparable deals · 380+ global buyers · rNPV · Risk-adjusted valuation · BD intelligence · Hong Kong · 跨境授权 · 战略匹配 · 中国资产·全球市场 · From China to the World · AI-powered · Editions 2026 ·</span>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- ==================== HOW IT WORKS ============================ -->
+<!-- ============================================================== -->
+<section class="bd-how" id="how">
+  <div class="bd-how-inner">
+    <div class="h-eyebrow">
+      <span class="zh-txt">运作机制 · 三步成交</span>
+      <span class="en-txt">How it works · three steps</span>
+    </div>
+    <h2>
+      <span class="zh-txt">从一份品种 PPT，<br/>到一笔<em>跨境交易</em>。</span>
+      <span class="en-txt">From a single asset deck,<br/>to a <em>cross-border deal</em>.</span>
+    </h2>
+    <p class="h-sub">
+      <span class="zh-txt">古典的尽职调查方法学，结合现代 AI 与 1,196 笔行业可比数据——三步走完战略 BD 的第一公里。</span>
+      <span class="en-txt">Classical due-diligence methodology, combined with modern AI and 1,196 industry comps — the first mile of strategic BD, distilled into three steps.</span>
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">i.</div>
+        <h3>
+          <span class="zh-txt">描述资产</span>
+          <span class="en-txt">Describe the asset</span>
+          <span class="en"><span class="zh-txt">DESCRIBE</span><span class="en-txt">step one</span></span>
+        </h3>
+        <p>
+          <span class="zh-txt">输入靶点、机制、适应证、临床阶段、地域权利、专利情况——左侧表单 30 秒完成。模型理解品种语义，而非关键字匹配。</span>
+          <span class="en-txt">Enter target, mechanism, indication, clinical stage, territory and IP — the sidebar takes 30 seconds. Our model parses asset semantics, not just keywords.</span>
+        </p>
+      </div>
+      <div class="step">
+        <div class="step-num">ii.</div>
+        <h3>
+          <span class="zh-txt">AI 估值与匹配</span>
+          <span class="en-txt">AI values & matches</span>
+          <span class="en"><span class="zh-txt">VALUE</span><span class="en-txt">step two</span></span>
+        </h3>
+        <p>
+          <span class="zh-txt">rNPV + 可比交易回归同步运行，输出首付款 / 里程碑 / Royalty 区间；370+ 全球买方根据组合策略、地理偏好、近期交易加权打分。</span>
+          <span class="en-txt">rNPV and comp-deal regression run in parallel to size upfront, milestones and royalty; 370+ global buyers are scored by portfolio fit, geography and recent activity.</span>
+        </p>
+      </div>
+      <div class="step">
+        <div class="step-num">iii.</div>
+        <h3>
+          <span class="zh-txt">交易路径</span>
+          <span class="en-txt">Deal path</span>
+          <span class="en"><span class="zh-txt">EXECUTE</span><span class="en-txt">step three</span></span>
+        </h3>
+        <p>
+          <span class="zh-txt">License-out、NewCo、联合开发、区域分割——AI 推荐最优交易结构，并给出条款 talking points 与可执行 outreach 清单。</span>
+          <span class="en-txt">License-out, NewCo, co-development, regional split — the engine recommends the optimal structure with term-sheet talking points and an actionable outreach shortlist.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== Tool head strip =============== -->
+<div class="tool-head" id="asset-tool">
+  <div>
+    <div class="th-eye">
+      <span class="zh-txt">现在开始 · The engine</span>
+      <span class="en-txt">Begin · The engine</span>
+    </div>
+    <h3>
+      <span class="zh-txt">输入<em>一个品种</em>，得到一笔<em>交易蓝图</em>。</span>
+      <span class="en-txt">Enter <em>one asset</em>, receive a <em>deal blueprint</em>.</span>
+    </h3>
+  </div>
+  <div class="th-r">
+    <span class="zh-txt">在左侧表单填写您的品种信息——估值、可比交易、推荐买方与交易路径将实时生成。所有计算可下钻参数与方法学。</span>
+    <span class="en-txt">Fill in your asset profile in the left panel — valuation, comparable deals, buyer matches and deal path render in real time. Every figure drills down to its parameters.</span>
+    <div class="arrow">↓ <span class="zh-txt">向下滚动 · 进入工具</span><span class="en-txt">scroll down · enter the tool</span></div>
   </div>
 </div>
 
