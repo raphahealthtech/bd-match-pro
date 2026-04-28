@@ -8,11 +8,13 @@
 **AI · China Assets · Global Markets**
 **AI · 中国资产 · 全球市场**
 
-[![Live demo](https://img.shields.io/badge/demo-live-d4af37?style=flat-square)](https://raphahealthtech.github.io/bd-match-pro/)
+[![Live demo](https://img.shields.io/badge/🌐_demo-live-d4af37?style=flat-square)](https://raphahealthtech.github.io/bd-match-pro/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1a3a5c?style=flat-square)](LICENSE)
-[![Made by Rapha Health](https://img.shields.io/badge/by-Rapha%20Health-0d0c0a?style=flat-square)](#contact)
+[![v1.0.0](https://img.shields.io/github/v/release/raphahealthtech/bd-match-pro?style=flat-square&color=0d0c0a)](https://github.com/raphahealthtech/bd-match-pro/releases)
+[![Stars](https://img.shields.io/github/stars/raphahealthtech/bd-match-pro?style=flat-square&color=d4af37)](https://github.com/raphahealthtech/bd-match-pro/stargazers)
+[![Discussions](https://img.shields.io/github/discussions/raphahealthtech/bd-match-pro?style=flat-square&color=1a3a5c)](https://github.com/raphahealthtech/bd-match-pro/discussions)
 
-[**🌐 Try the live tool · 立即体验**](https://raphahealthtech.github.io/bd-match-pro/)
+[**🌐 Try the live tool · 立即体验**](https://raphahealthtech.github.io/bd-match-pro/) · [**🐙 Source**](https://github.com/raphahealthtech/bd-match-pro) · [**🗺️ Roadmap**](https://github.com/raphahealthtech/bd-match-pro/issues/2) · [**💬 Discussions**](https://github.com/raphahealthtech/bd-match-pro/discussions)
 
 </div>
 
