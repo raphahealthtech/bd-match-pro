@@ -142,8 +142,8 @@ We welcome:
 Released under the [MIT License](LICENSE). You may use, modify, distribute, and even commercialise this software freely, provided you retain the copyright notice.
 基于 [MIT 协议](LICENSE) 发布。任何人都可以自由使用、修改、分发，甚至商用，只需保留版权声明。
 
-**⚠️ Not investment advice.** Outputs are research-grade estimates. See [LICENSE](LICENSE) for the full disclaimer.
-**⚠️ 不构成投资建议。** 输出仅为研究级估算，完整免责声明见 [LICENSE](LICENSE)。
+**⚠️ Not investment advice.** Outputs are research-grade estimates. See [DISCLAIMER](DISCLAIMER.md) for the full notice.
+**⚠️ 不构成投资建议。** 输出仅为研究级估算，完整免责声明见 [DISCLAIMER](DISCLAIMER.md)。
 
 ---
 
