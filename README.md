@@ -27,9 +27,11 @@
 ### 它能做什么
 
 1. **匹配买家**——基于 380+ 全球战略买家的组合策略、地理偏好、近期交易动作，对一个具体品种打分排序，给出**最契合的对手方清单 + 公开联系方式**。
-2. **估值与交易结构**——并行运行 **rNPV 风险调整模型** 与 **1,196 笔可比交易回归**，给出首付款、里程碑、销售提成的合理区间，并推荐 License-out / NewCo / 联合开发 / 区域分割 等交易结构。
+2. **估值与交易结构**——把 **rNPV 风险调整模型** 与 **可比交易回归** 按 50/50 权重融合(可比交易精选库当前 53 笔，覆盖 2024-11 → 2025-12 公开披露的跨境授权交易)，给出首付款、里程碑、销售提成的合理区间，并推荐 License-out / NewCo / 联合开发 / 区域分割 等交易结构。当匹配样本 < 3 时模型自动退化为纯 rNPV，并在结果区显式提示。
 3. **参数全开放**——成功率（PoS）、贴现率（WACC）、峰值销售、毛利率、爬坡曲线、专利期等核心参数全部可由用户自由调整，**实时**看到不同假设下的估值变化。
-4. **方法学透明**——所有公式、参数默认值、买方权重逻辑均在源代码与方法学面板中公开，欢迎挑战、修改、改进。
+4. **方法学透明**——所有公式、参数默认值、买方权重逻辑、相似度加权方式均在源代码与方法学面板中公开，欢迎挑战、修改、改进。
+
+> **关于数据库规模的诚实说明**：v1.0 数据库目前是手工录入的 53 笔精选跨境交易（仅含已公开披露金额的条目）。这是一个起点，不是终点——v1.1 路线图把"扩充至 500+ 交易"列为社区贡献第一优先项，欢迎在 [Issues](https://github.com/raphahealthtech/bd-match-pro/issues) 提交补充数据。
 
 ### 为什么开源
 
@@ -46,9 +48,11 @@
 ### What it does
 
 1. **Match buyers** — score and rank 380+ global strategic acquirers against your asset, based on portfolio fit, geographic preference and recent deal activity. Output includes **buyer profile, financial snapshot, recent transactions and public contact details**.
-2. **Value & structure** — run **risk-adjusted NPV** and **1,196-deal comparable regression** in parallel; size upfront / milestones / royalty ranges; recommend License-out, NewCo, Co-development or Regional split structures.
+2. **Value & structure** — blend **risk-adjusted NPV** with a **comparable-deal regression** at 50/50 weight (the curated comp database currently holds 53 publicly disclosed cross-border deals from 2024-11 → 2025-12); size upfront / milestones / royalty ranges; recommend License-out, NewCo, Co-development or Regional split structures. When fewer than 3 similar comps exist, the model falls back to pure rNPV — transparently flagged in the result panel.
 3. **Fully parametric** — every input (PoS, WACC, peak sales, margin, ramp curve, patent runway, etc.) is **user-adjustable** and the valuation re-renders in real time.
-4. **Transparent methodology** — every formula, default parameter and weight is documented in the methodology panel and in the source. Challenge it, fork it, improve it.
+4. **Transparent methodology** — every formula, default parameter, weight and similarity-scoring rule is documented in the methodology panel and in the source. Challenge it, fork it, improve it.
+
+> **An honest note about database size**: the v1.0 database is 53 hand-curated cross-border deals (disclosed-economics only). This is a starting point, not the destination — the v1.1 roadmap makes "expand DEALS_DB to 500+" the top community-contribution priority. Submit additional public deals via [Issues](https://github.com/raphahealthtech/bd-match-pro/issues).
 
 ### Why open-source
 
@@ -82,31 +86,70 @@ The entire app is a **single self-contained `index.html` file** — no build ste
 
 ## 🧮 Methodology · 方法学
 
-### Risk-adjusted NPV (rNPV) for new drugs
+The valuation engine runs two independent paths and blends them at 50/50 (when ≥ 3 similar comps exist):
+
+### 1 · Parametric path — Risk-adjusted NPV (rNPV)
 
 ```
-rNPV = Σ [ PoS_cumulative(t) × CashFlow(t) × (1 - tax) × (1 + WACC)^(-t) ] − DevCost_pv
+rNPV_licensor = PoS × Σ_t  [ Peak × Ramp(t) × ModPremium × CompMult × RoyaltyRate ] / (1 + WACC)^t
+rNPV_asset    = PoS × Σ_t  [ Peak × Ramp(t) × ModPremium × CompMult × NetMargin ]   / (1 + WACC)^t
 ```
 
-- **PoS_cumulative** — cumulative probability of success from the asset's *current* clinical stage to approval (defaults: Preclinical 5% → Phase I 10% → Phase II 17% → Phase III 52% → NDA 88% → Approved 100%)
-- **CashFlow(t)** — peak licensed-territory sales × ramp[t] × net margin × modality premium × competition multiplier
+- **PoS_cumulative** — Preclinical 5% → Phase I 10% → Phase II 17% → Phase III 52% → NDA 88% → Approved 100% (BIO/QLS/Informa benchmarks, user-editable)
 - **WACC** — default 11% (user-adjustable)
-- **Patent runway** — default 10 years post-approval; ramp curve covers ramp-up, peak, and LOE decline
+- **Patent runway** — 10 years post-approval; ramp curve 10/30/60/85/100/100/95/80/55/25
+- **ModPremium** — sm 1.00 · mab 1.05 · bsab 1.25 · adc 1.40 · cart 1.50 · gt 1.55 · pep 1.10 · olig 1.20 · rc 1.45
 
-### Biosimilar valuation
+### 2 · Data path — Comparable-deal regression
 
-A separate model with biosim-specific PoS (higher), WACC (lower, 9%), gross margin (~55%), share-of-originator ramp curve, and discount-vs-originator parameter.
+For each deal in `DEALS_DB` (currently 53 hand-curated cross-border licensing deals with disclosed economics), compute a similarity weight:
 
-### Buyer matching
+```
+weight(d) = 0.02 (baseline)
+          + 0.50 (indication direct hit) | 0.25 (adjacent) | 0.10 (same TA)
+          + 0.30 (modality direct hit)   | 0.08 × ratio(ModPremium) (mismatch)
+          + 0.20 (stage hit) | 0.10 (±1 stage) | 0.04 (±2 stages)
+```
 
-Each buyer carries vectors over: therapeutic-area portfolio, modality preference, geographic split, recent dealmaking activity, financial firepower (cash + market cap). Matching is a weighted cosine score with explainable per-axis contribution.
+Deals passing a real-similarity gate (indication ≥ adjacent OR modality direct match OR weak triple of indication/modality/stage) are weighted-resampled, then quantiles taken:
 
-### Comparable-deal pricing
+```
+total_implied   = median(samples) × stage_correction × mod_correction × terr_factor
+upfront_implied = median(samples.upfront)         × (same correction terms)
+P10 / P90       = 20% / 80% quantiles of resampled distribution
+```
 
-1,196 publicly disclosed licensing transactions, indexed by indication × stage × modality × buyer-tier, drive the upfront / milestone / royalty regression bands.
+### 3 · Blended output
 
-**Full methodology panel is in the running app, and all parameters are visible & editable in the source (`index.html`).**
-**完整方法学在运行中的应用方法学面板里，所有参数都在源码 `index.html` 中可见、可改。**
+```
+total_blended    = 0.5 × rNPV_total   + 0.5 × total_implied      // when N ≥ 3
+upfront_blended  = 0.5 × rNPV_upfront + 0.5 × upfront_implied
+P10 / P90        = union(rNPV sensitivity, comp quantile)        // conservative
+```
+
+When fewer than 3 similar comps exist, the model falls back to pure rNPV and the result panel explicitly says so.
+
+### 4 · Biosimilar valuation
+
+A separate model with biosim-specific PoS (higher), WACC (lower, 9%), gross margin (~55%), share-of-originator ramp curve, and discount-vs-originator parameter. **Biosim does not currently use comp-blending** — DEALS_DB carries too few biosim transactions to support the regression.
+
+### 5 · Buyer matching
+
+```
+Score = 40·IndicationFit + 25·ModalityFit + 20·StageFit + 10·FinancialCapacity + 5·RecentActivity
+```
+
+Each axis is documented in the methodology panel with its sub-weights.
+
+### Known limitations
+
+- **Small sample** — only 53 disclosed-economics deals; statistical confidence is limited and P10/P90 bands run wide.
+- **Selection bias** — database over-indexes China license-outs vs. pure overseas in-licensing.
+- **Biobucks inflation** — reported "total deal value" often inflates distant sales milestones.
+- **No biosim regression** — too few biosim deals in v1.0.
+
+**Full methodology panel is in the running app (Methodology tab); all parameters are visible & editable in the source `index.html`.**
+**完整方法学在运行中应用的方法学面板里，所有参数都在源码 `index.html` 中可见、可改。**
 
 ---
 

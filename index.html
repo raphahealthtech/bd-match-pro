@@ -187,6 +187,28 @@ body.lang-en .param-pos-grid label.current .pl-lbl::after{content:' ◀ Current'
 .note{background:var(--cream);border-left:3px solid var(--accent-2);padding:12px 14px;font-size:12px;color:var(--ink-2);border-radius:0 4px 4px 0;line-height:1.6;margin-top:12px}
 .note b{color:var(--ink)}
 
+/* methodology panel — disclosure banner */
+.m-banner{background:linear-gradient(135deg,rgba(212,175,55,0.08) 0%,rgba(26,58,92,0.04) 100%);border:1px solid rgba(212,175,55,0.35);border-left:4px solid var(--accent);padding:18px 20px;border-radius:6px;margin-bottom:8px}
+.m-banner-tag{display:inline-block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-2);font-weight:600;background:#fff;padding:3px 10px;border-radius:999px;border:1px solid rgba(26,58,92,0.18)}
+.m-banner h3{color:var(--ink) !important}
+.m-banner code{background:var(--cream-2);padding:1px 6px;border-radius:3px;font-size:11px}
+#p-method h3{font-size:15px;margin-top:24px;margin-bottom:10px;letter-spacing:.02em}
+#p-method ul li{margin-bottom:6px;font-size:12.5px;line-height:1.55}
+#p-method .m-link{color:var(--accent-2);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px;font-weight:500}
+
+/* comp-vs-rNPV reconciliation strip (v1.0.1) */
+.recon-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;padding:14px;background:linear-gradient(180deg,var(--cream) 0%,#fff 100%);border:1px solid var(--line);border-radius:8px}
+.recon-strip.empty{display:block;background:var(--cream);border-style:dashed;font-size:12px;color:var(--ink-2);line-height:1.6}
+.recon-row{padding:8px 12px;border-right:1px solid var(--line);position:relative}
+.recon-row:last-child{border-right:0}
+.recon-row .recon-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500;margin-bottom:6px}
+.recon-row .recon-val{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:600;color:var(--ink);line-height:1.1;margin-bottom:4px}
+.recon-row .recon-sub{font-size:11px;color:var(--ink-2);line-height:1.45}
+.recon-row.blend{background:rgba(212,175,55,0.08);border-radius:6px;border-right:0}
+.recon-row.blend .recon-val{color:var(--accent)}
+.recon-row .m-link{color:var(--accent);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px;cursor:pointer}
+@media (max-width:760px){.recon-strip{grid-template-columns:1fr}.recon-row{border-right:0;border-bottom:1px solid var(--line)}.recon-row:last-child{border-bottom:0}}
+
 .formula{font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--cream);padding:10px 12px;border-radius:4px;color:var(--ink-2);margin-top:10px;overflow-x:auto;white-space:pre}
 
 /* ===== BUYERS ===== */
@@ -387,7 +409,7 @@ body.lang-en .bd-hero h1.headline{line-height:.98}
     <a><span class="zh-txt">方法学</span><span class="en-txt">Methodology</span></a>
     <a href="#contact-section" class="nav-contact"><span class="zh-txt">联系咨询</span><span class="en-txt">Contact</span></a>
   </div>
-  <div class="pill">v1.0 · 1,196 deals</div>
+  <div class="pill">v1.0 · <span class="deal-count-n">—</span> curated deals</div>
   <div class="lang-switch" id="lang-switch">
     <button data-l="zh" class="on">中</button>
     <button data-l="en">EN</button>
@@ -595,8 +617,8 @@ body.lang-en .bd-hero h1.headline{line-height:.98}
     </h1>
 
     <p class="lede">
-      <span class="zh-txt"><strong>BD Match Pro</strong> 是 AI 驱动的跨境授权交易引擎。基于 1,196 笔可比交易、买方组合策略与 rNPV 风险调整模型，为中国生物医药资产精准匹配全球买方、估算合理对价、规划交易路径——这是中国资产走向世界市场的第一步。</span>
-      <span class="en-txt"><strong>BD Match Pro</strong> is an AI-powered cross-border licensing engine. Drawing on 1,196 comparable deals, buyer-portfolio strategy and risk-adjusted NPV, we match Chinese biopharma assets with the right global buyer, model fair-value pricing, and chart the path to a transaction — the first step of bringing Chinese assets to the world.</span>
+      <span class="zh-txt"><strong>BD Match Pro</strong> 是 AI 驱动的跨境授权交易引擎。**模型把参数化 rNPV 与可比交易回归 50/50 融合**——基于精选录入的 <span class="deal-count-n">—</span> 笔跨境交易、380+ 全球买方组合策略，为中国生物医药资产精准匹配买方、估算对价、规划交易路径。这是中国资产走向世界市场的第一步。</span>
+      <span class="en-txt"><strong>BD Match Pro</strong> is an AI-powered cross-border licensing engine. **The model blends parametric rNPV with comparable-deal regression 50/50** — drawing on <span class="deal-count-n">—</span> hand-curated cross-border deals and 380+ global buyer profiles to match assets with the right counterparty, model fair-value pricing, and chart a path to transaction. The first step of bringing Chinese assets to the world.</span>
     </p>
 
     <div class="hero-cta-row">
@@ -634,8 +656,8 @@ body.lang-en .bd-hero h1.headline{line-height:.98}
 <!-- =============== Marquee strip =============== -->
 <div class="hero-marquee" aria-hidden="true">
   <div class="track">
-    <span>1,196 comparable deals · 380+ global buyers · rNPV · Risk-adjusted valuation · BD intelligence · Hong Kong · 跨境授权 · 战略匹配 · 中国资产·全球市场 · From China to the World · AI-powered · Editions 2026 ·</span>
-    <span>1,196 comparable deals · 380+ global buyers · rNPV · Risk-adjusted valuation · BD intelligence · Hong Kong · 跨境授权 · 战略匹配 · 中国资产·全球市场 · From China to the World · AI-powered · Editions 2026 ·</span>
+    <span>Comp-blended rNPV · 380+ global buyers · curated cross-border deals · Risk-adjusted valuation · BD intelligence · Hong Kong · 跨境授权 · 战略匹配 · 中国资产·全球市场 · From China to the World · AI-powered · Editions 2026 ·</span>
+    <span>Comp-blended rNPV · 380+ global buyers · curated cross-border deals · Risk-adjusted valuation · BD intelligence · Hong Kong · 跨境授权 · 战略匹配 · 中国资产·全球市场 · From China to the World · AI-powered · Editions 2026 ·</span>
   </div>
 </div>
 
@@ -653,8 +675,8 @@ body.lang-en .bd-hero h1.headline{line-height:.98}
       <span class="en-txt">From a single asset deck,<br/>to a <em>cross-border deal</em>.</span>
     </h2>
     <p class="h-sub">
-      <span class="zh-txt">古典的尽职调查方法学，结合现代 AI 与 1,196 笔行业可比数据——三步走完战略 BD 的第一公里。</span>
-      <span class="en-txt">Classical due-diligence methodology, combined with modern AI and 1,196 industry comps — the first mile of strategic BD, distilled into three steps.</span>
+      <span class="zh-txt">古典的尽职调查方法学，结合现代 AI 与 <span class="deal-count-n">—</span> 笔精选跨境交易回归——三步走完战略 BD 的第一公里。</span>
+      <span class="en-txt">Classical due-diligence methodology, combined with modern AI and a <span class="deal-count-n">—</span>-deal cross-border comp regression — the first mile of strategic BD, distilled into three steps.</span>
     </p>
 
     <div class="steps">
@@ -722,7 +744,7 @@ body.lang-en .bd-hero h1.headline{line-height:.98}
   <!-- ============ SIDEBAR: INPUT ============ -->
   <aside class="sidebar">
     <h2><span class="zh-txt">品种信息</span><span class="en-txt">Asset profile</span></h2>
-    <div class="lead"><span class="zh-txt">输入品种基本信息，系统将基于行业可比交易估算管线价值、交易指导条件并匹配潜在买方。</span><span class="en-txt">Enter the asset profile. The engine estimates pipeline value, suggests deal terms and matches qualified buyers based on 1,196 industry comps.</span></div>
+    <div class="lead"><span class="zh-txt">输入品种基本信息，系统将融合参数化 rNPV 与 <span class="deal-count-n">—</span> 笔精选可比交易回归，估算管线价值、交易指导条件并匹配潜在买方。</span><span class="en-txt">Enter the asset profile. The engine blends parametric rNPV with a <span class="deal-count-n">—</span>-deal comp regression to estimate pipeline value, suggest deal terms and match qualified buyers.</span></div>
 
     <div class="field">
       <label><span class="zh-txt">品种类型</span><span class="en-txt">Drug class</span></label>
@@ -1075,8 +1097,8 @@ Enter peak sales only for the licensed/target territory. E.g. China-only license
 
     <div class="divider"></div>
     <div class="hint">
-      <span class="zh-txt"><b>方法学:</b> 创新药采用 rNPV 模型（阶段概率 × 峰值销售 × 特许权 - 现值折现）；类似药采用利润分成现金流折现。买方匹配基于「适应证 + 药物类型 + 阶段 + 财务能力 + 近期活跃度」五维加权评分，历史交易样本 N=1,196（过去12个月）。</span>
-      <span class="en-txt"><b>Methodology:</b> new drugs use rNPV (stage PoS × peak sales × royalty, discounted); biosimilars use profit-share DCF. Buyer matching scores on 5 dimensions: indication fit + modality + stage + financial capacity + recent activity. Underlying comps: N=1,196 deals from the past 12 months.</span>
+      <span class="zh-txt"><b>方法学:</b> 创新药采用 <b>rNPV 参数模型 + 可比交易回归 50/50 融合</b>(阶段概率 × 峰值销售 × 特许权 - 现值折现, 融合 DEALS_DB 中相似度加权样本中位); 类似药采用利润分成 DCF。买方匹配基于「适应证 + 药物类型 + 阶段 + 财务能力 + 近期活跃度」五维加权评分。可比交易精选库当前 N=<span class="deal-count-n">—</span> 笔(已剔除未披露金额)，详见 <a href="#p-method" data-tab="p-method" class="m-link">方法学面板</a>。</span>
+      <span class="en-txt"><b>Methodology:</b> new drugs use <b>rNPV blended 50/50 with comp regression</b> (stage PoS × peak sales × royalty discounted, fused with similarity-weighted median of DEALS_DB samples); biosimilars use profit-share DCF. Buyer matching scores on 5 dimensions: indication fit + modality + stage + financial capacity + recent activity. Curated comp database: N=<span class="deal-count-n">—</span> deals (disclosed-economics only). Full details in <a href="#p-method" data-tab="p-method" class="m-link">methodology panel</a>.</span>
     </div>
   </aside>
 
@@ -1162,7 +1184,7 @@ Enter peak sales only for the licensed/target territory. E.g. China-only license
     <div class="panel" id="p-deal">
       <div class="section">
         <h3><span class="zh-txt">同类可比交易</span><span class="en-txt">Comparable deals</span></h3>
-        <div class="sect-sub"><span class="zh-txt">自近 12 个月 1,196 笔医药BD交易中筛选 · 优先同适应证 / 同药物类型 / 同阶段</span><span class="en-txt">Filtered from 1,196 deals of the past 12 months · prioritizing same indication / modality / stage.</span></div>
+        <div class="sect-sub"><span class="zh-txt">自精选录入的 <span class="deal-count-n">—</span> 笔跨境授权交易中按相似度排序 · 优先同适应证 / 同药物类型 / 同阶段 · 见 <a href="#p-method" data-tab="p-method" class="m-link">方法学</a></span><span class="en-txt">Ranked by similarity from <span class="deal-count-n">—</span> hand-curated cross-border deals · same indication / modality / stage prioritized · see <a href="#p-method" data-tab="p-method" class="m-link">methodology</a></span></div>
         <div id="deal-list"><div class="empty"><span class="zh-txt">请先完成估值测算</span><span class="en-txt">Run the valuation first</span></div></div>
       </div>
     </div>
@@ -1170,26 +1192,77 @@ Enter peak sales only for the licensed/target territory. E.g. China-only license
     <!-- ===== METHODOLOGY PANEL ===== -->
     <div class="panel" id="p-method">
       <div class="section">
-        <h3><span class="zh-txt">估值方法学</span><span class="en-txt">Valuation methodology</span></h3>
 
-        <h4><span class="zh-txt">1 · 创新药 rNPV 模型</span><span class="en-txt">1 · New drug rNPV model</span></h4>
-        <div class="formula">rNPV = Σ (CF_t × PoS_t) / (1+r)^t   -   Σ Cost_t × PoS_t / (1+r)^t
+        <!-- Honest disclosure banner — first thing the reader sees -->
+        <div class="m-banner">
+          <div class="m-banner-tag"><span class="zh-txt">数据透明承诺</span><span class="en-txt">Data transparency</span></div>
+          <h3 style="margin:6px 0 10px;font-size:18px">
+            <span class="zh-txt">这一节解释了模型的每一步——以及它做不到的事。</span>
+            <span class="en-txt">This section documents every step of the model — and what it cannot do.</span>
+          </h3>
+          <p style="margin:0;font-size:13px;line-height:1.65;color:var(--ink-2)">
+            <span class="zh-txt">v1.0 估值算法**真实使用**了我们手工录入的 <b id="m-deal-count">—</b> 笔跨境授权交易（覆盖 2024-11 至 2025-12 公开披露数据，已剔除未披露金额条目）。可比交易回归与 rNPV 参数模型按 50/50 权重融合输出最终估值；当匹配样本 &lt;3 时退化为纯 rNPV。这只是一个起点——欢迎社区贡献把数据库扩充到 500+ 条目，让回归更扎实。<a href="https://github.com/raphahealthtech/bd-match-pro/issues" target="_blank" class="m-link">提交数据 →</a></span>
+            <span class="en-txt">The v1.0 valuation algorithm **actually uses** the <b id="m-deal-count-en">—</b> hand-curated cross-border licensing deals in DEALS_DB (publicly disclosed 2024-11 → 2025-12, with non-disclosed economics filtered out). Comp-regression and rNPV are blended 50/50; when fewer than 3 similar comps exist, the model falls back to pure rNPV. This is a starting point — community contributions are how we get to 500+ deals and tighter regression. <a href="https://github.com/raphahealthtech/bd-match-pro/issues" target="_blank" class="m-link">Submit data →</a></span>
+          </p>
+        </div>
 
-PoS_stage:  preclin 5% · Ph1 10% · Ph2 17% · Ph3 52% · NDA 88% · approved 100%
-r (WACC): 11% · horizon: launch+10y LOE · terminal: 0
-<span class="zh-txt">峰值销售到达 launch+5y · 爬坡曲线</span><span class="en-txt">Peak sales reached at launch+5y · ramp curve</span> 10/30/60/85/100/100/95/80/55/25</div>
+        <h3 style="margin-top:28px"><span class="zh-txt">1 · 创新药 rNPV 模型(参数路径)</span><span class="en-txt">1 · New drug rNPV (parametric path)</span></h3>
+        <div class="formula">rNPV_licensor = PoS × Σ_t  [Peak × Ramp(t) × ModPremium × CompMult × RoyaltyRate]
+                  ÷ (1 + WACC)^t
 
-        <h4><span class="zh-txt">2 · 类似药利润分成模型</span><span class="en-txt">2 · Biosimilar profit-share model</span></h4>
-        <div class="formula">NPV = Σ (PeakSales × (1-Discount) × MarketShare_t × Margin × ProfitShare) / (1+r)^t
+rNPV_asset    = PoS × Σ_t  [Peak × Ramp(t) × ModPremium × CompMult × NetMargin]
+                  ÷ (1 + WACC)^t
 
-<span class="zh-txt">默认值:  分成 35-45% · 对原研折价 25-35% · 毛利 55% · 市占率爬坡</span><span class="en-txt">Defaults:  share 35-45% · discount vs originator 25-35% · GM 55% · share ramp</span> 5/20/40/55/65/70</div>
+<span class="zh-txt">PoS · 阶段累计上市概率</span><span class="en-txt">PoS · cumulative probability to approval</span>
+   preclin 5% · Ph1 10% · Ph2 17% · Ph3 52% · NDA 88% · approved 100%
 
-        <h4><span class="zh-txt">3 · 交易结构拆分</span><span class="en-txt">3 · Deal structure decomposition</span></h4>
+<span class="zh-txt">默认 WACC 11% · NetMargin 30% · 上市后 10 年专利期</span><span class="en-txt">Default WACC 11% · NetMargin 30% · 10y post-approval patent runway</span>
+<span class="zh-txt">Ramp 曲线</span><span class="en-txt">Ramp curve</span>: 10/30/60/85/100/100/95/80/55/25  (% of peak by year)
+ModPremium: sm 1.00 · mab 1.05 · bsab 1.25 · adc 1.40 · cart 1.50 · gt 1.55 · pep 1.10 · olig 1.20 · rc 1.45
+CompMult: FIC 1.25 · me-too 1.00 · me-third 0.75</div>
+
+        <h3><span class="zh-txt">2 · 可比交易回归(数据路径)</span><span class="en-txt">2 · Comparable-deal regression (data path)</span></h3>
+        <div class="formula"><span class="zh-txt">// 在 DEALS_DB 中对每笔有披露金额的交易计算相似度权重</span><span class="en-txt">// For each deal with disclosed economics, compute similarity weight</span>
+weight(d) = 0.05 (baseline)
+          + 0.50 if d.indication == p.indication else 0.25 (adjacent) | 0.10 (same TA)
+          + 0.30 if d.modality   == p.modality   else 0.10 × ratio(ModPremium)
+          + 0.20 if d.stage      == p.stage      else 0.10 (±1) | 0.04 (±2)
+
+<span class="zh-txt">// 仅保留 weight > 0.20 的样本; 若 N &lt; 3, 跳过本路径</span><span class="en-txt">// Keep samples with weight > 0.20; abort if N &lt; 3</span>
+<span class="zh-txt">// 加权重采样后取分位数</span><span class="en-txt">// Resample by weight, then take quantiles</span>
+total_implied  = median(weighted_samples.total)    × stage_correction × mod_correction × terr_factor
+upfront_implied= median(weighted_samples.upfront)  × (same correction)
+P10 / P90      = 20%/80% quantiles of resampled distribution
+
+stage_correction = StageMult(p.stage) / weighted_avg(StageMult(d.stage))
+mod_correction   = ModPremium(p.mod)  / weighted_avg(ModPremium(d.mod))
+terr_factor      = 1.0 (global) / 0.85 (3+ regions) / 0.70 (2 regions) / 0.55 (single)
+StageMult: preclin 0.35 · Ph1 0.7 · Ph2 1.0 · Ph3 1.6 · NDA 2.4 · approved 3.0</div>
+
+        <h3><span class="zh-txt">3 · 融合(blended) — 把两条路径合起来</span><span class="en-txt">3 · Blended output — combining both paths</span></h3>
+        <div class="formula">total_blended    = 0.5 × rNPV_total + 0.5 × total_implied        <span class="zh-txt">// N ≥ 3 时</span><span class="en-txt">// when N ≥ 3</span>
+upfront_blended  = 0.5 × rNPV_upfront + 0.5 × upfront_implied
+P10 / P90        = union(rNPV_sensitivity, comp_quantile)         <span class="zh-txt">// 取并集,更保守</span><span class="en-txt">// take union, conservative</span>
+
+<span class="zh-txt">退化情况:  当 DEALS_DB 中匹配样本 &lt; 3 时, 输出 = 100% rNPV(并在结果区显示退化提示)</span><span class="en-txt">Fallback: when matched samples in DEALS_DB &lt; 3, output = 100% rNPV (a fallback notice is shown in the result panel)</span></div>
+
+        <h3><span class="zh-txt">4 · 类似药利润分成模型</span><span class="en-txt">4 · Biosimilar profit-share model</span></h3>
+        <div class="formula">NPV_licensor_share = PoS × Σ_t  [OrigPeak × (1 - Discount) × ShareRamp(t) × GM × ProfitShare]
+                            ÷ (1 + BS_WACC)^t
+
+<span class="zh-txt">默认值:</span><span class="en-txt">Defaults:</span>  share 35-45% · discount vs originator 25-35% · GM 55% · BS_WACC 9%
+<span class="zh-txt">类似药 PoS:</span><span class="en-txt">Biosim PoS:</span>  preclin 15% · Ph1 25% · Ph2 45% · Ph3 70% · NDA 85% · approved 100%
+ShareRamp: 5/20/40/55/65/70  (% market share vs originator by year)
+
+<span class="zh-txt">v1.0 类似药估值仅采用参数路径(不进行 comp-blended), 因为 DEALS_DB 中类似药交易样本极少。</span><span class="en-txt">Biosim valuation uses the parametric path only (no comp-blending) in v1.0 — DEALS_DB carries too few biosim transactions to support the regression.</span></div>
+
+        <h3><span class="zh-txt">5 · 交易结构拆分</span><span class="en-txt">5 · Deal structure decomposition</span></h3>
         <div class="formula">Upfront : Milestone : Royalty  ≈  8% : 40% : 52%  <span class="zh-txt">(新药全球均值)</span><span class="en-txt">(global new drug average)</span>
-<span class="zh-txt">按阶段首付占比:</span><span class="en-txt">Upfront % by stage:</span>  preclin 3-5% / Ph1 6-10% / Ph2 10-15% / Ph3 15-25%
-royalty rate:  Ph1 8-11% · Ph2 10-13% · Ph3 12-16% · Mkt 14-20%</div>
+<span class="zh-txt">按阶段首付占比 (参数模型):</span><span class="en-txt">Upfront % by stage (parametric):</span>  preclin 4% · Ph1 7% · Ph2 11% · Ph3 18% · NDA 28% · approved 42%
+royalty rate:  Ph1 8-11% · Ph2 10-13% · Ph3 12-16% · Mkt 14-20%
+<span class="zh-txt">P50 由参数+回归融合给出, P10/P90 由模型敏感性 ∪ 可比分位数 给出。</span><span class="en-txt">P50 from blended path; P10/P90 = union of model sensitivity and comp quantiles.</span></div>
 
-        <h4><span class="zh-txt">4 · 买方匹配评分 (满分 100)</span><span class="en-txt">4 · Buyer matching score (out of 100)</span></h4>
+        <h3><span class="zh-txt">6 · 买方匹配评分 (满分 100)</span><span class="en-txt">6 · Buyer matching score (out of 100)</span></h3>
         <div class="formula">Score = 40·IndicationFit + 25·ModalityFit + 20·StageFit
       + 10·FinancialCapacity + 5·RecentActivity
 
@@ -1203,7 +1276,29 @@ royalty rate:  Ph1 8-11% · Ph2 10-13% · Ph3 12-16% · Mkt 14-20%</div>
 - FinancialCapacity: log(cash+revenue) normalized
 - RecentActivity: BD count last 12M, normalized</span></div>
 
-        <div class="note"><span class="zh-txt"><b>数据来源:</b> 估值基础参数取自 BioPharma Catalyst / EvaluatePharma / ClinicalTrials.gov 公开 PoS 数据；可比交易数据来自 GlobalData / BioPharm Catalyst / 公司新闻稿在 2025-04 至 2026-04 期间披露的共 1,196 笔交易。买方财务数据取 2025 财年年报（或最近季报折年化）。本工具仅用于BD评估参考，不构成投资建议。</span><span class="en-txt"><b>Data sources:</b> PoS parameters from BioPharma Catalyst / EvaluatePharma / ClinicalTrials.gov. Comparable deals from GlobalData / BioPharm Catalyst / company press releases disclosed between 2025-04 and 2026-04 (n=1,196). Buyer financials from FY25 annual reports (or latest quarterly annualized). For BD evaluation reference only; not investment advice.</span></div>
+        <h3 style="margin-top:24px"><span class="zh-txt">数据来源 & 已知局限</span><span class="en-txt">Data sources & known limitations</span></h3>
+        <div class="note">
+          <p style="margin:0 0 10px"><b><span class="zh-txt">数据来源</span><span class="en-txt">Data sources</span></b></p>
+          <ul style="margin:0 0 12px 18px;padding:0">
+            <li><span class="zh-txt"><b>PoS 默认值:</b> BIO/QLS/Informa《Clinical Development Success Rates 2011-2020》行业基准。</span><span class="en-txt"><b>PoS defaults:</b> BIO/QLS/Informa <i>Clinical Development Success Rates 2011-2020</i> industry benchmark.</span></li>
+            <li><span class="zh-txt"><b>可比交易数据库 (DEALS_DB):</b> 公司新闻稿、SEC 8-K/20-F 文件、BioPharma Dive / FiercePharma / Endpoints News 报道,人工录入,聚焦中国-海外跨境授权交易。当前 <span id="m-deal-count-2">—</span> 笔。</span><span class="en-txt"><b>Comp database (DEALS_DB):</b> hand-curated from company press releases, SEC 8-K/20-F filings, BioPharma Dive / FiercePharma / Endpoints News reporting; focused on China–overseas cross-border licensing. Currently <span id="m-deal-count-en-2">—</span> deals.</span></li>
+            <li><span class="zh-txt"><b>买方财务:</b> FY25 年报(MNC)或最近季报年化(中等市值);现金 = 现金+短期投资。</span><span class="en-txt"><b>Buyer financials:</b> FY25 annual reports (MNCs) or latest quarterly annualized (mid-caps); cash = cash + short-term investments.</span></li>
+          </ul>
+          <p style="margin:0 0 10px"><b><span class="zh-txt">已知局限</span><span class="en-txt">Known limitations</span></b></p>
+          <ul style="margin:0 0 0 18px;padding:0">
+            <li><span class="zh-txt"><b>样本量小:</b> 仅 <span id="m-deal-count-3">—</span> 笔可比交易,统计置信度有限,P10/P90 区间会偏宽。</span><span class="en-txt"><b>Small sample:</b> only <span id="m-deal-count-en-3">—</span> deals — statistical confidence is limited; P10/P90 bands run wide.</span></li>
+            <li><span class="zh-txt"><b>选择偏差:</b> 数据库偏向中国 license-out 交易,纯海外 in-licensing 覆盖较少。</span><span class="en-txt"><b>Selection bias:</b> the database over-indexes China license-outs vs. pure overseas in-licensing.</span></li>
+            <li><span class="zh-txt"><b>未披露金额未纳入:</b> 公开仅披露"undisclosed terms"的交易未参与回归。</span><span class="en-txt"><b>Undisclosed deals excluded:</b> transactions with "undisclosed terms" are not included in regression.</span></li>
+            <li><span class="zh-txt"><b>biobucks 膨胀:</b> "总额"通常含发生概率较低的远期里程碑(销售里程碑常被高估)。</span><span class="en-txt"><b>Biobucks inflation:</b> reported "total deal value" often inflates distant sales milestones with low realization probability.</span></li>
+            <li><span class="zh-txt"><b>类似药未做回归:</b> 类似药交易在 DEALS_DB 中样本极少,v1.0 仅用参数路径。</span><span class="en-txt"><b>No biosim regression:</b> too few biosim deals in DEALS_DB; v1.0 uses parametric only.</span></li>
+            <li><span class="zh-txt"><b>买方近期活跃度更新:</b> 2025-Q4 起的并购/授权动作需要社区帮助持续刷新。</span><span class="en-txt"><b>Buyer recency:</b> deal activity since 2025-Q4 needs ongoing community refresh.</span></li>
+          </ul>
+        </div>
+
+        <div class="note" style="border-left-color:var(--accent)">
+          <span class="zh-txt"><b>本工具仅用于 BD 评估参考,不构成投资建议。</b>所有源代码、参数默认值、公式实现均在 GitHub <code>index.html</code> 公开可见;欢迎挑战、修改、改进。</span>
+          <span class="en-txt"><b>For BD evaluation reference only; not investment advice.</b> All source code, parameter defaults and formula implementations are visible in <code>index.html</code> on GitHub. Challenge it, fork it, improve it.</span>
+        </div>
       </div>
     </div>
 
@@ -2477,30 +2572,63 @@ function calcBiosim(p){
 }
 
 // ------- deal terms suggestion -------
+//   New v1.0.1 — blends rNPV-implied total with comp-implied total
+//   when there are >=3 disclosed comparable deals. Otherwise falls back
+//   to pure rNPV-derived terms (and tags the result as such).
 function suggestTerms(p, val){
   if(p.cls==='new'){
-    const total = val.rnpvAsset * 1.0;    // 行业经验: total deal ≈ rNPV_asset × 0.8-1.2 (含biobucks膨胀)
+    // (a) rNPV-implied terms (the original path)
+    const rTotal = val.rnpvAsset * 1.0;
     const upfrontPct = STAGE_UPFRONT_PCT[p.stage];
-    const upfront = total * upfrontPct;
-    const milestones = total - upfront - total*0.30;  // 假设royalty折现后约30%回流
+    const rUpfront = rTotal * upfrontPct;
     const royaltyLow = STAGE_ROYALTY[p.stage][0];
     const royaltyHigh = STAGE_ROYALTY[p.stage][1];
+
+    // (b) comp-implied terms from DEALS_DB (may be null if too few comps)
+    const comp = compImpliedValue(p);
+
+    // (c) blend — equal weight when comp is available; pure rNPV when not
+    let total, upfront, blendWeight;
+    if(comp){
+      blendWeight = 0.5;
+      total = rTotal*(1-blendWeight) + comp.impliedTotal*blendWeight;
+      upfront = rUpfront*(1-blendWeight) + comp.impliedUpfront*blendWeight;
+    } else {
+      blendWeight = 0;
+      total = rTotal;
+      upfront = rUpfront;
+    }
+
+    // P10/P90 bands: combine rNPV sensitivity with comp quantile range
+    const p10Total = comp ? Math.min(rTotal*0.55, comp.impliedTotalP10) : rTotal*0.55;
+    const p90Total = comp ? Math.max(rTotal*1.6,  comp.impliedTotalP90) : rTotal*1.6;
+    const p10Upfront = comp ? Math.min(rUpfront*0.55, comp.impliedUpfrontP10) : rUpfront*0.55;
+    const p90Upfront = comp ? Math.max(rUpfront*1.7,  comp.impliedUpfrontP90) : rUpfront*1.7;
+
     return {
       total, upfront, milestones: total - upfront,
       royaltyLow, royaltyHigh,
-      p10:{total:total*0.55, upfront:upfront*0.55},
+      // diagnostic: what the two paths produced before blending
+      rnpvTotal: rTotal, rnpvUpfront: rUpfront,
+      compTotal: comp ? comp.impliedTotal : null,
+      compUpfront: comp ? comp.impliedUpfront : null,
+      compN: comp ? comp.n : 0,
+      blendWeight,
+      p10:{total:p10Total, upfront:p10Upfront},
       p50:{total, upfront},
-      p90:{total:total*1.6, upfront:upfront*1.7}
+      p90:{total:p90Total, upfront:p90Upfront}
     };
   }else{
-    const total = val.npv * 1.8;  // biosim 交易总额
-    const upfront = total * 0.15;
+    const rTotal = val.npv * 1.8;  // biosim 交易总额
+    const rUpfront = rTotal * 0.15;
     return {
-      total, upfront, milestones: total-upfront,
+      total: rTotal, upfront: rUpfront, milestones: rTotal-rUpfront,
       royaltyLow: p.bsShare/100*0.9, royaltyHigh: p.bsShare/100*1.1,
-      p10:{total:total*0.5, upfront:upfront*0.5},
-      p50:{total, upfront},
-      p90:{total:total*1.7, upfront:upfront*1.7}
+      rnpvTotal: rTotal, rnpvUpfront: rUpfront,
+      compTotal: null, compUpfront: null, compN: 0, blendWeight: 0,
+      p10:{total:rTotal*0.5, upfront:rUpfront*0.5},
+      p50:{total:rTotal, upfront:rUpfront},
+      p90:{total:rTotal*1.7, upfront:rUpfront*1.7}
     };
   }
 }
@@ -2586,6 +2714,137 @@ function findComps(p, limit=20){
   });
   scored.sort((a,b)=>b.matchScore - a.matchScore);
   return scored.slice(0, limit);
+}
+
+// ------- statistical helpers (transparent, vanilla) -------
+function _median(arr){
+  if(!arr.length) return null;
+  const s = arr.slice().sort((a,b)=>a-b);
+  const m = Math.floor(s.length/2);
+  return s.length%2 ? s[m] : (s[m-1]+s[m])/2;
+}
+function _quantile(arr, q){
+  if(!arr.length) return null;
+  const s = arr.slice().sort((a,b)=>a-b);
+  const idx = (s.length-1)*q;
+  const lo = Math.floor(idx), hi = Math.ceil(idx);
+  if(lo===hi) return s[lo];
+  return s[lo] + (s[hi]-s[lo])*(idx-lo);
+}
+
+/* -------------------------------------------------------------
+   Comp-implied valuation
+   -----------------------------------------------------------------
+   Pulls similarity-weighted samples from DEALS_DB and returns
+   median/quantile bands for upfront and total deal size, computed
+   ONLY on disclosed-economics rows (total>0).
+   Returns null when fewer than 3 usable comps are found.
+   ------------------------------------------------------------- */
+function compImpliedValue(p){
+  // weight each deal by similarity to the current asset profile
+  const weighted = DEALS_DB
+    .filter(d => d.total > 0 && d.upfront >= 0)   // disclosed economics only
+    .map(d=>{
+      // Compute axis sub-weights so we can filter on REAL similarity, not noise
+      let indW = 0;
+      if(d.ind === p.ind) indW = 0.50;
+      else if((IND_ADJ[p.ind]||[]).includes(d.ind)) indW = 0.25;
+      else if(d.ind && p.ind &&
+              d.ind.split('_')[0] === p.ind.split('_')[0]) indW = 0.10;
+
+      let modW = 0;
+      if(d.mod === p.mod) modW = 0.30;
+      else if(MOD_PREMIUM[d.mod] && MOD_PREMIUM[p.mod]) {
+        const r = Math.min(MOD_PREMIUM[d.mod], MOD_PREMIUM[p.mod]) /
+                  Math.max(MOD_PREMIUM[d.mod], MOD_PREMIUM[p.mod]);
+        modW = 0.08 * r;     // mismatch contribution kept small
+      }
+
+      const dStageIdx = STAGE_ORDER.indexOf(d.stage);
+      const pStageIdx = STAGE_ORDER.indexOf(p.stage);
+      const dist = Math.abs(dStageIdx - pStageIdx);
+      let stgW = 0;
+      if(dist === 0) stgW = 0.20;
+      else if(dist === 1) stgW = 0.10;
+      else if(dist === 2) stgW = 0.04;
+
+      const w = 0.02 + indW + modW + stgW;   // tiny baseline so nothing is fully zero
+      return {...d, _w:w, _indW:indW, _modW:modW, _stgW:stgW};
+    })
+    // Real similarity gate: require either an indication OR a modality match
+    // (or both adjacent + same stage), otherwise the "comp" isn't actually comparable.
+    .filter(d =>
+      d._indW >= 0.25 ||                                    // direct or adjacent indication
+      d._modW >= 0.30 ||                                    // direct modality match
+      (d._indW >= 0.10 && d._modW >= 0.05 && d._stgW >= 0.10) // weak triple
+    );
+
+  if(weighted.length < 3) return null;   // not enough signal — return null, UI decides
+
+  // weighted resample (each row appears Math.round(w*10) times) for quantile bands
+  const upfrontSamples = [];
+  const totalSamples = [];
+  const upRatioSamples = [];
+  weighted.forEach(d=>{
+    const reps = Math.max(1, Math.round(d._w * 10));
+    for(let i=0;i<reps;i++){
+      totalSamples.push(d.total);
+      upfrontSamples.push(d.upfront);
+      if(d.total>0) upRatioSamples.push(d.upfront/d.total);
+    }
+  });
+
+  const totalMed = _median(totalSamples);
+  const upMed = _median(upfrontSamples);
+  const ratioMed = _median(upRatioSamples);
+
+  // stage adjustment: similarity-weighted samples still skew toward the majority
+  // stage in DEALS_DB. We correct toward the target stage explicitly.
+  const stageAdjMap = {preclin:0.35, ph1:0.7, ph2:1.0, ph3:1.6, nda:2.4, appr:3.0};
+  let sumW = 0, sumStageAdj = 0;
+  weighted.forEach(d=>{
+    sumW += d._w;
+    sumStageAdj += d._w * (stageAdjMap[d.stage]||1);
+  });
+  const sampleAdj = sumW>0 ? sumStageAdj/sumW : 1;
+  const targetAdj = stageAdjMap[p.stage] || 1;
+  const stageCorrection = targetAdj / sampleAdj;
+
+  // modality correction (premium-multiplier ratio)
+  let sumModW = 0, sumModPrem = 0;
+  weighted.forEach(d=>{
+    sumModW += d._w;
+    sumModPrem += d._w * (MOD_PREMIUM[d.mod]||1);
+  });
+  const sampleMod = sumModW>0 ? sumModPrem/sumModW : 1;
+  const targetMod = MOD_PREMIUM[p.mod] || 1;
+  const modCorrection = targetMod / sampleMod;
+
+  // territory haircut: peak.input is region-specific; DEALS_DB upfront/total reflect
+  // mostly ex-China or global rights — apply territory factor as a soft adjuster
+  const terrFactor = Array.isArray(p.terr) && p.terr.includes('global') ? 1.0 :
+                     Array.isArray(p.terr) && p.terr.length>=3 ? 0.85 :
+                     Array.isArray(p.terr) && p.terr.length===2 ? 0.70 :
+                     0.55;
+
+  const correction = stageCorrection * modCorrection * terrFactor;
+
+  return {
+    n: weighted.length,
+    nDisclosed: weighted.length,           // already filtered to disclosed
+    sampleHead: weighted.sort((a,b)=>b._w-a._w).slice(0,8),
+    correction,
+    rawTotalMed: totalMed,
+    rawUpfrontMed: upMed,
+    rawUpRatioMed: ratioMed,
+    impliedTotalP10: _quantile(totalSamples, 0.20) * correction,
+    impliedTotal: totalMed * correction,
+    impliedTotalP90: _quantile(totalSamples, 0.80) * correction,
+    impliedUpfrontP10: _quantile(upfrontSamples, 0.20) * correction,
+    impliedUpfront: upMed * correction,
+    impliedUpfrontP90: _quantile(upfrontSamples, 0.80) * correction,
+    impliedUpRatio: ratioMed
+  };
 }
 
 // ------- RENDERING -------
@@ -2693,8 +2952,37 @@ function renderValuation(p, val, terms){
     `;
   }
 
+  // ----- comp-vs-rNPV reconciliation strip (NEW v1.0.1) -----
+  // Show users *both* paths side-by-side and how the blended figure was reached.
+  const reconHTML = (p.cls==='new') ? (() => {
+    if(!terms.compN){
+      return `<div class="recon-strip empty">
+        <span class="zh-txt"><b>本品种数据库匹配 ≥3 笔可比交易的样本不足，本次估值仅采用 rNPV 路径。</b>欢迎在 GitHub Issues 提交相似适应证 / 阶段 / 药物类型的公开授权交易补充数据库。</span>
+        <span class="en-txt"><b>Fewer than 3 disclosed comparable deals match this profile in DEALS_DB; valuation falls back to pure rNPV.</b> Help expand the database via GitHub Issues — submit public licensing deals for this indication / stage / modality.</span>
+      </div>`;
+    }
+    return `<div class="recon-strip">
+      <div class="recon-row">
+        <div class="recon-label"><span class="zh-txt">rNPV 路径</span><span class="en-txt">rNPV path</span></div>
+        <div class="recon-val">${fmtM(terms.rnpvTotal)}</div>
+        <div class="recon-sub"><span class="zh-txt">参数化模型 · PoS×峰值×折现</span><span class="en-txt">parametric · PoS × peak × discount</span></div>
+      </div>
+      <div class="recon-row">
+        <div class="recon-label"><span class="zh-txt">可比交易回归</span><span class="en-txt">Comp regression</span></div>
+        <div class="recon-val">${fmtM(terms.compTotal)}</div>
+        <div class="recon-sub"><span class="zh-txt">基于 ${terms.compN} 笔相似度加权样本(中位)</span><span class="en-txt">similarity-weighted median of ${terms.compN} comps</span></div>
+      </div>
+      <div class="recon-row blend">
+        <div class="recon-label"><span class="zh-txt">融合后 P50</span><span class="en-txt">Blended P50</span></div>
+        <div class="recon-val">${fmtM(terms.total)}</div>
+        <div class="recon-sub"><span class="zh-txt">权重 50/50 · 见<a href="#p-method" data-tab="p-method" class="m-link">方法学</a></span><span class="en-txt">50/50 weight · see <a href="#p-method" data-tab="p-method" class="m-link">methodology</a></span></div>
+      </div>
+    </div>`;
+  })() : '';
+
   // terms panel
   $('#val-terms').innerHTML = `
+    ${reconHTML}
     <table class="table">
       <thead><tr><th>${t('场景','Scenario')}</th><th class="num">Total Deal</th><th class="num">Upfront</th><th class="num">Milestones</th><th class="num">Royalty/Share</th></tr></thead>
       <tbody>
@@ -2703,7 +2991,7 @@ function renderValuation(p, val, terms){
         <tr><td>${t('乐观 P90','Bull · P90')}</td><td class="num">${fmtM(terms.p90.total)}</td><td class="num">${fmtM(terms.p90.upfront)}</td><td class="num">${fmtM(terms.p90.total-terms.p90.upfront)}</td><td class="num">${pct(terms.royaltyHigh)}</td></tr>
       </tbody>
     </table>
-    <div class="note">${t(`<b>建议谈判锚点:</b> 首付占比 ${pct(terms.upfront/terms.total)} 处于${p.cls==='new'?STAGE_NAME[p.stage]+' 阶段的行业中位':'类似药交易典型区间'}。实际谈判中首付款会随竞争激烈程度(是否多家竞价)上浮 30-80%。`,`<b>Anchor:</b> upfront ratio ${pct(terms.upfront/terms.total)} sits at the industry median for ${p.cls==='new'?STAGE_NAME[p.stage]+' stage':'biosim deals'}. Under competitive bidding, upfront typically climbs 30-80% above the base.`)}</div>
+    <div class="note">${t(`<b>建议谈判锚点:</b> 首付占比 ${pct(terms.upfront/terms.total)} 处于${p.cls==='new'?STAGE_NAME[p.stage]+' 阶段的行业中位':'类似药交易典型区间'}。${terms.compN?`本次估值已与 ${terms.compN} 笔可比交易做 50/50 融合，P10/P90 区间同时取自参数模型敏感性与可比交易分位数(取并集)。`:''}实际谈判中首付款会随竞争激烈程度(是否多家竞价)上浮 30-80%。`,`<b>Anchor:</b> upfront ratio ${pct(terms.upfront/terms.total)} sits at the industry median for ${p.cls==='new'?STAGE_NAME[p.stage]+' stage':'biosim deals'}. ${terms.compN?`This valuation blends rNPV and comp-implied figures 50/50 over ${terms.compN} similarity-matched deals; P10/P90 take the union of model sensitivity and comp quantile bands.`:''} Under competitive bidding, upfront typically climbs 30-80% above the base.`)}</div>
   `;
 
   // sensitivity
@@ -2831,7 +3119,7 @@ function renderComps(comps){
       <thead><tr><th>时间 Date</th><th>买方 Buyer</th><th>卖方 Seller</th><th>品种 Asset</th><th>适应证 Indication</th><th>药物类型 Modality</th><th>阶段 Stage</th><th class="num">总金额 Total</th><th class="num">首付 Upfront</th><th class="num">匹配 Match</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>
-    <div class="note" style="margin-top:14px">${t('<b>说明:</b> 上表为近 12 个月公开披露的医药BD交易，按 "适应证(40)+药物类型(30)+阶段(20)+邻接性(10)" 与当前品种匹配打分后展示。中国卖方交易以红色 CN 标记。金额单位为美元；未披露金额的交易(1,196 笔中约 916 笔)未纳入此表。','<b>Note:</b> deals disclosed in the last 12 months, ranked by indication(40)+modality(30)+stage(20)+adjacency(10) match vs. current asset. Chinese sellers flagged as CN. USD amounts. Deals without disclosed terms (~916 of 1,196) are excluded.')}</div>
+    <div class="note" style="margin-top:14px">${t(`<b>说明:</b> 上表为已精选录入的 ${DEALS_DB.length} 笔跨境授权交易，按 "适应证(40)+药物类型(30)+阶段(20)+邻接性(10)" 与当前品种匹配打分。中国卖方交易以红色 CN 标记。金额单位为美元。<b>本数据库仅含已公开披露金额的交易</b>——<a href="https://github.com/raphahealthtech/bd-match-pro/issues" target="_blank" class="m-link">欢迎在 GitHub Issues 提交补充数据</a>。`,`<b>Note:</b> the table shows the ${DEALS_DB.length} hand-curated cross-border licensing deals in the database, ranked by indication(40)+modality(30)+stage(20)+adjacency(10) match. Chinese sellers flagged as CN. USD amounts. <b>The database contains only deals with disclosed economics</b> — <a href="https://github.com/raphahealthtech/bd-match-pro/issues" target="_blank" class="m-link">submit additional data via GitHub Issues</a>.`)}</div>
   `;
 }
 
@@ -2895,6 +3183,23 @@ $$('.tab').forEach(t=>{
     t.classList.add('on');
     $('#'+t.dataset.p).classList.add('on');
   });
+});
+
+// delegated handler for inline methodology links inside dynamic content
+document.body.addEventListener('click', (e)=>{
+  const a = e.target.closest('a.m-link[data-tab]');
+  if(!a) return;
+  e.preventDefault();
+  const tabId = a.dataset.tab;
+  $$('.tab').forEach(x=>x.classList.remove('on'));
+  $$('.panel').forEach(x=>x.classList.remove('on'));
+  const tabEl = $(`.tab[data-p="${tabId}"]`);
+  const panelEl = $('#'+tabId);
+  if(tabEl) tabEl.classList.add('on');
+  if(panelEl){
+    panelEl.classList.add('on');
+    panelEl.scrollIntoView({behavior:'smooth', block:'start'});
+  }
 });
 
 // buyer group filter — 多选逻辑
@@ -3085,6 +3390,22 @@ $('#f-ind').addEventListener('change', ()=>{
 // 初始化: 页面打开时按默认 stage(ph2)设置 PoS 面板, 按默认 class(new) 显示对应参数
 syncStageUI();
 syncClassUI();
+
+// Populate dynamic deal-count placeholders so the methodology panel always shows
+// the real DEALS_DB.length (no hardcoded marketing number).
+(function populateDealCounts(){
+  const n = DEALS_DB.length;
+  const disclosed = DEALS_DB.filter(d => d.total > 0).length;
+  ['m-deal-count','m-deal-count-2','m-deal-count-3'].forEach(id=>{
+    const el = document.getElementById(id); if(el) el.textContent = n;
+  });
+  ['m-deal-count-en','m-deal-count-en-2','m-deal-count-en-3'].forEach(id=>{
+    const el = document.getElementById(id); if(el) el.textContent = n;
+  });
+  // also populate any element with class .deal-count-n / .deal-count-disclosed
+  $$('.deal-count-n').forEach(el=>{ el.textContent = n; });
+  $$('.deal-count-disclosed').forEach(el=>{ el.textContent = disclosed; });
+})();
 
 $('#btn-run').addEventListener('click', ()=>{
   applyParams();
