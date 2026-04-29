@@ -26,12 +26,12 @@
 
 ### 它能做什么
 
-1. **匹配买家**——基于 380+ 全球战略买家的组合策略、地理偏好、近期交易动作，对一个具体品种打分排序，给出**最契合的对手方清单 + 公开联系方式**。
-2. **估值与交易结构**——把 **rNPV 风险调整模型** 与 **可比交易回归** 按 50/50 权重融合(可比交易精选库当前 53 笔，覆盖 2024-11 → 2025-12 公开披露的跨境授权交易)，给出首付款、里程碑、销售提成的合理区间，并推荐 License-out / NewCo / 联合开发 / 区域分割 等交易结构。当匹配样本 < 3 时模型自动退化为纯 rNPV，并在结果区显式提示。
+1. **匹配买家**——基于 75 家全球战略买家的精选画像（组合策略、地理偏好、近期交易动作），对一个具体品种打分排序，给出**最契合的对手方清单 + 公开联系方式**。
+2. **估值与交易结构**——把 **rNPV 风险调整模型** 与 **可比交易回归** 按 50/50 权重融合(可比交易库当前 328 笔，覆盖 2024-11 → 2026-02 公开披露的跨境授权交易；其中 ~50 笔为人工精选含完整临床阶段，其余为批量摄入、临床阶段标记 `unknown`、药物类型按药名规则推断)，给出首付款、里程碑、销售提成的合理区间，并推荐 License-out / NewCo / 联合开发 / 区域分割 等交易结构。当匹配样本 < 3 时模型自动退化为纯 rNPV，并在结果区显式提示。
 3. **参数全开放**——成功率（PoS）、贴现率（WACC）、峰值销售、毛利率、爬坡曲线、专利期等核心参数全部可由用户自由调整，**实时**看到不同假设下的估值变化。
 4. **方法学透明**——所有公式、参数默认值、买方权重逻辑、相似度加权方式均在源代码与方法学面板中公开，欢迎挑战、修改、改进。
 
-> **关于数据库规模的诚实说明**：v1.0 数据库目前是手工录入的 53 笔精选跨境交易（仅含已公开披露金额的条目）。这是一个起点，不是终点——v1.1 路线图把"扩充至 500+ 交易"列为社区贡献第一优先项，欢迎在 [Issues](https://github.com/raphahealthtech/bd-match-pro/issues) 提交补充数据。
+> **关于数据库规模与质量的诚实说明**：v1.0.2 库共 328 笔。其中 53 笔为 v1.0 起就已经手工精选录入的高质量条目（含完整临床阶段、备注），其余 275 笔为从公开披露数据批量摄入——**临床阶段一律标记为 `unknown`，药物类型 (modality) 通过药名规则推断**（如 `-mab` → 单抗、`-tinib` → 小分子、ADC / CAR-T 通过显式 token）。短期路线：(a) 扩充至 500+，(b) 给批量条目回填临床阶段。欢迎在 [Issues](https://github.com/raphahealthtech/bd-match-pro/issues) 提交补充数据。
 
 ### 为什么开源
 
@@ -47,12 +47,12 @@
 
 ### What it does
 
-1. **Match buyers** — score and rank 380+ global strategic acquirers against your asset, based on portfolio fit, geographic preference and recent deal activity. Output includes **buyer profile, financial snapshot, recent transactions and public contact details**.
-2. **Value & structure** — blend **risk-adjusted NPV** with a **comparable-deal regression** at 50/50 weight (the curated comp database currently holds 53 publicly disclosed cross-border deals from 2024-11 → 2025-12); size upfront / milestones / royalty ranges; recommend License-out, NewCo, Co-development or Regional split structures. When fewer than 3 similar comps exist, the model falls back to pure rNPV — transparently flagged in the result panel.
+1. **Match buyers** — score and rank 75 deeply profiled global strategic acquirers against your asset, based on portfolio fit, geographic preference and recent deal activity. Output includes **buyer profile, financial snapshot, recent transactions and public contact details**.
+2. **Value & structure** — blend **risk-adjusted NPV** with a **comparable-deal regression** at 50/50 weight (the comp database currently holds 328 publicly disclosed cross-border deals from 2024-11 → 2026-02; ~50 are hand-curated with full clinical-stage detail, the remainder are bulk-ingested with **clinical stage marked `unknown`** and **modality inferred from drug-name patterns**); size upfront / milestones / royalty ranges; recommend License-out, NewCo, Co-development or Regional split structures. When fewer than 3 similar comps exist, the model falls back to pure rNPV — transparently flagged in the result panel.
 3. **Fully parametric** — every input (PoS, WACC, peak sales, margin, ramp curve, patent runway, etc.) is **user-adjustable** and the valuation re-renders in real time.
 4. **Transparent methodology** — every formula, default parameter, weight and similarity-scoring rule is documented in the methodology panel and in the source. Challenge it, fork it, improve it.
 
-> **An honest note about database size**: the v1.0 database is 53 hand-curated cross-border deals (disclosed-economics only). This is a starting point, not the destination — the v1.1 roadmap makes "expand DEALS_DB to 500+" the top community-contribution priority. Submit additional public deals via [Issues](https://github.com/raphahealthtech/bd-match-pro/issues).
+> **An honest note about database size and quality**: the v1.0.2 database is 328 deals total — 53 hand-curated entries from v1.0 (full clinical-stage detail and editorial notes), plus 275 bulk-ingested from public deal data with **clinical stage marked `unknown`** and **modality inferred from drug-name patterns** (e.g. `-mab` → mAb, `-tinib` → small molecule, ADC / CAR-T from explicit tokens). Near-term priorities: (a) expand to 500+, (b) backfill clinical stage on the bulk-ingested entries. Submit additional public deals via [Issues](https://github.com/raphahealthtech/bd-match-pro/issues).
 
 ### Why open-source
 
@@ -102,7 +102,7 @@ rNPV_asset    = PoS × Σ_t  [ Peak × Ramp(t) × ModPremium × CompMult × NetM
 
 ### 2 · Data path — Comparable-deal regression
 
-For each deal in `DEALS_DB` (currently 53 hand-curated cross-border licensing deals with disclosed economics), compute a similarity weight:
+For each deal in `DEALS_DB` (currently 328 cross-border licensing deals with disclosed economics — 53 hand-curated with full detail, 275 bulk-ingested with `stage:unknown` and inferred modality), compute a similarity weight:
 
 ```
 weight(d) = 0.02 (baseline)
@@ -143,10 +143,11 @@ Each axis is documented in the methodology panel with its sub-weights.
 
 ### Known limitations
 
-- **Small sample** — only 53 disclosed-economics deals; statistical confidence is limited and P10/P90 bands run wide.
+- **Modest sample** — 328 disclosed-economics deals; statistical confidence improves with sample size but P10/P90 bands still run wide for narrow indication × stage × modality slices.
+- **Inferred fields on 275 of 328 entries** — clinical stage is `unknown` and modality is inferred from drug-name patterns; an entry with `ind:unknown` contributes only via modality match in the similarity-weighted regression and is appropriately downweighted in the median, but it does inflate the displayed `N`.
 - **Selection bias** — database over-indexes China license-outs vs. pure overseas in-licensing.
 - **Biobucks inflation** — reported "total deal value" often inflates distant sales milestones.
-- **No biosim regression** — too few biosim deals in v1.0.
+- **No biosim regression** — too few biosim deals to support a separate regression.
 
 **Full methodology panel is in the running app (Methodology tab); all parameters are visible & editable in the source `index.html`.**
 **完整方法学在运行中应用的方法学面板里，所有参数都在源码 `index.html` 中可见、可改。**

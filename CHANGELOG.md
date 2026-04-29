@@ -10,12 +10,36 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ## [Unreleased]
 
 ### Planned · 计划中
-- ⭐ **Expand DEALS_DB → 500+ deals** (top community-contribution priority)
+- ⭐ **Expand DEALS_DB → 500+ deals** (top community-contribution priority — currently 328)
+- ⭐ **Backfill clinical stage** on the ~275 bulk-ingested entries (currently `unknown`)
 - Tunable comp-blend weight slider (currently fixed at 50/50)
 - Side-by-side scenario comparison · 双场景并列对比
 - PDF / one-pager export · PDF / 一页报告导出
 - Save/load asset profiles via URL hash · 通过 URL hash 保存与分享方案
 - Stage-conditional WACC defaults · 分阶段默认 WACC
+
+---
+
+## [1.0.2] · 2026-04-29
+
+### 📈 Expanded deal database + honest buyer count
+
+#### Added · 新增
+- **DEALS_DB expanded 53 → 328 entries** via bulk ingest from public deal data covering 2024-11 → 2026-02
+  - 53 hand-curated entries retained (full clinical-stage detail + editorial notes)
+  - 275 bulk-ingested entries — disclosed-economics only, with **clinical stage marked `unknown`** and **modality inferred from drug-name patterns** (e.g. `-mab` → mAb, `-tinib` → small molecule, ADC / CAR-T from explicit tokens)
+- **`.buyer-count-n` placeholder** populated at load with real `BUYERS.length` (no more hardcoded marketing number)
+
+#### Changed · 调整
+- All "**380+ global buyers**" copy replaced with the real `BUYERS.length` (currently 75 deeply profiled buyers) — same approach used for deal count in v1.0.1
+- Methodology transparency banner expanded to flag the inferred-stage / inferred-modality nature of bulk entries
+- Hero strapline + footer + version pill bumped to v1.0.2
+- Date-range note updated: 2024-11 → 2026-02
+
+#### Notes · 说明
+- The bulk-ingest yield (280 from 1,196 raw rows) reflects strict filtering: only deals with disclosed total dollar amounts in 亿/万/百万 USD/EUR/GBP/JPY/HKD/RMB/KRW were accepted; FX-converted to USD
+- Comp regression now sees more samples per query — but for typical small-molecule searches, most matches pass the similarity gate via modality alone (since `ind:unknown` does not contribute indication weight). The weighted median appropriately downweights these
+- Backfilling clinical stage and indication on the bulk-ingested entries is the next high-leverage data improvement
 
 ---
 
@@ -64,6 +88,7 @@ The original v1.0.0 release claimed "1,196 comparable deals" in marketing copy; 
 #### Open-sourced under · 开源协议
 - MIT License — see [LICENSE](LICENSE)
 
-[Unreleased]: https://github.com/raphahealthtech/bd-match-pro/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/raphahealthtech/bd-match-pro/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/raphahealthtech/bd-match-pro/releases/tag/v1.0.2
 [1.0.1]: https://github.com/raphahealthtech/bd-match-pro/releases/tag/v1.0.1
 [1.0.0]: https://github.com/raphahealthtech/bd-match-pro/releases/tag/v1.0.0
